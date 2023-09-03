@@ -11,27 +11,28 @@
  */
 class Solution {
 public:
-    TreeNode* build(vector<int>&P,int i1,int j1,vector<int>&I,int i2,int j2)
+    unordered_map<int,int>M;
+    int idx;
+    TreeNode* build(vector<int>&P,int s,int e)
     {
-        if(i1 > j1)
+        if(s > e)
             return NULL;
         
-        TreeNode *node = new TreeNode(P[i1]);
-
-        int i;
-        for(i=i2;i<=j2;i++)
-        {
-            if(P[i1] == I[i])
-                break;
-        }
-
-        node->left = build(P,i1+1,i1+i-i2,I,i2,i-1);
-        node->right = build(P,i1+i-i2+1,j1,I,i+1,j2);
-
+        int rootvalue = P[idx++];
+        TreeNode *node = new TreeNode(rootvalue);
+        node->left = build(P,s,M[rootvalue]-1);
+        node->right = build(P,M[rootvalue]+1,e);
         return node;
     }
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
         
-        return build(preorder,0,preorder.size()-1,inorder,0,inorder.size()-1);
+        
+        idx=0;
+
+        for(int i=0;i<inorder.size();i++)
+            M[inorder[i]] = i;
+
+        return build(preorder,0,preorder.size()-1);
+        
     }
 };
