@@ -19,9 +19,23 @@ public:
         }
         return DP[T] = x;
     }
+    unsigned long long tab(vector<int>&nums,long T,vector<unsigned long long >&DP)
+    {
+        DP[0] = 1;
+
+        for(long long  i=1;i<T+1;i++)
+        {
+            for(long long  x : nums)
+            {
+                if(i-x >= 0)
+                    DP[i] += DP[i-x];
+            }
+        }
+        return DP[T];
+    }
     int combinationSum4(vector<int>& nums, int target) {
         
-        vector<int>DP(target+1,-1);
-        return solve(nums,target,DP);
+        vector<unsigned long long>DP(target+1,0);
+        return tab(nums,target,DP);
     }
 };
