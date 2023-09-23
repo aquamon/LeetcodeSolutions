@@ -14,12 +14,13 @@ public:
 
             for(int j=0;j<words[i].size();j++)
             {
-                string temp = "";
-                for(int k=0;k<words[i].size();k++)
-                {
-                    if(k!=j)
-                        temp += words[i][k];
-                }
+                string temp = words[i];
+                temp.erase(j,1);
+                // for(int k=0;k<words[i].size();k++)
+                // {
+                //     if(k!=j)
+                //         temp += words[i][k];
+                // }
 
                 if(M.find(temp) != M.end())
                 {
