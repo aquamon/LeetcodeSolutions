@@ -1,18 +1,18 @@
 class Solution {
 public:
 
-    int solve(vector<int>&A,int N)
-    {
-        int ans = 0;
-        for(int i=0;i<N;i++)
-        {
-            if(A[i] >= N-i)
-            {
-                ans = max(ans,N-i);
-            }
-        }
-        return ans;
-    }
+    // int solve(vector<int>&A,int N)
+    // {
+    //     int ans = 0;
+    //     for(int i=0;i<N;i++)
+    //     {
+    //         if(A[i] >= N-i)
+    //         {
+    //             ans = max(ans,N-i);
+    //         }
+    //     }
+    //     return ans;
+    // }
     
     int hIndex(vector<int>& citations) {
         int N = citations.size();
