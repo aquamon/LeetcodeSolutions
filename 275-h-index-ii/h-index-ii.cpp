@@ -17,21 +17,21 @@ public:
     int hIndex(vector<int>& citations) {
         int N = citations.size();
         return solve(citations,N);
-        // int start = 0;
-        // int end = N-1;
-        // int ans = 0;
-        // while(start <= end)
-        // {
-        //     int mid = start + (end-start)/2;
+        int start = 0;
+        int end = N-1;
+        int ans = 0;
+        while(start <= end)
+        {
+            int mid = start + (end-start)/2;
             
-        //     if(citations[mid] >= N-mid)
-        //     {
-        //         ans = max(ans,N-mid);
-        //         end = mid-1;
-        //     }
-        //     else
-        //         start = mid + 1;
-        // }
-        // return ans;
+            if(citations[mid] >= N-mid)
+            {
+                ans = max(ans,N-mid);
+                end = mid-1;
+            }
+            else
+                start = mid + 1;
+        }
+        return ans;
     }
 };
