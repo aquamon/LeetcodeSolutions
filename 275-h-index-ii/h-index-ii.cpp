@@ -16,7 +16,7 @@ public:
     
     int hIndex(vector<int>& citations) {
         int N = citations.size();
-        return solve(citations,N);
+        // return solve(citations,N);
         int start = 0;
         int end = N-1;
         int ans = 0;
