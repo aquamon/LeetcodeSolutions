@@ -13,7 +13,7 @@ public:
                 if(board[i][j] == '.')
                     continue;
                 int curr = board[i][j] - '0';
-                cout<<curr<<" ";
+                
                 if(ROW[i].find(curr) != ROW[i].end())
                     return false;
                 if(COL[j].find(curr) != COL[i].end())
