@@ -1,50 +1,57 @@
 class Solution {
 public:
 
-    void print(vector<vector<int>>&mat,int row, int col,int R,int C,vector<int>&res)
+    void print(int x1, int y1, int x2, int y2,vector<vector<int>>&mat,vector<int>&res)
     {
-        if(row >= R or col >= C)
-            return;
+        for(int i=y1;i<=y2;i++)
+            res.push_back(mat[x1][i]);
         
-        for(int i=row;i<C;i++)
-            res.push_back(mat[row][i]);
+        for(int j=x1+1;j<x2;j++)
+            res.push_back(mat[j][y2]);
         
-        for(int i=row+1;i<R;i++)
-            res.push_back(mat[i][C-1]);
+        for(int i=y2;i>=y1;i--)
+            res.push_back(mat[x2][i]);
         
-        if(R-1 != row)
-        {
-             for(int i=C-2;i>=col;i--)
-            {
-                res.push_back(mat[R-1][i]);
-            }
-
-        }
-        if(C-1 != col)
-        {
-            for(int i=R-2;i>row;i--)
-            {
-                res.push_back(mat[i][col]);
-            }
-
-        }
-        print(mat,row+1,col+1,R-1,C-1,res);
+        for(int j=x2-1;j>x1;j--)
+            res.push_back(mat[j][y1]);
         
-        
+        return;
     }
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
-
+        
         int M = matrix.size();
         int N = matrix[0].size();
 
+        int x1 = 0 , y1 = 0 , x2 = M-1, y2 = N-1;
         vector<int>res;
-        if(matrix.size() == 0)
+        while(x1 < x2 and y1 < y2)
         {
-            vector<int>A;
-            return A;
+            print(x1,y1,x2,y2,matrix,res);
+            x1++;
+            x2--;
+            y1++;
+            y2--;
         }
-        print(matrix,0,0,M,N,res);
+
+        if(x1 == x2 and y1 == y2)
+        {
+            res.push_back(matrix[x1][y2]);
+
+        }
+        else if(x1 == x2 and y1 < y2)
+        {
+            for(int i=y1;i<=y2;i++)
+                res.push_back(matrix[x1][i]);
+        }
+
+        else if(y1 == y2 and x1 < x2)
+        {
+            for(int j=x1;j<=x2;j++)
+                res.push_back(matrix[j][y1]);
+        }
 
         return res;
+
+
     }
 };
