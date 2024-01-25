@@ -61,7 +61,8 @@ public:
         }
 
         if(firstRowZero)
-            fill(matrix[0].begin(),matrix[0].end(),0);
+            for(int i=0;i<matrix[0].size();i++)
+                matrix[0][i] = 0;
         
         if(firstColZero)
         {
