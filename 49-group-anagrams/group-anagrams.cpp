@@ -1,30 +1,21 @@
 class Solution {
 public:
-
-    vector<int> findAna(string S)
-    {
-        vector<int> freq(26,0);
-        for(int i=0;i<S.length();i++)
-            freq[S[i] - 'a']++;
-        return freq;
-    }
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
         
-        map<vector<int>,vector<string>>M;
+        unordered_map<string,vector<string>>M;
 
-        for(string S : strs)
+        for(string x:strs)
         {
-            vector<int> ana = findAna(S);
-            M[ana].push_back(S);
+            string curr = x;
+            sort(curr.begin(),curr.end());
+            M[curr].push_back(x);
         }
 
-        vector<vector<string>>ans;
+        vector<vector<string>>res;
 
-        for(auto i : M)
-        {
-            ans.push_back(i.second);
-        }
-
-        return ans;
+        for(auto it:M)
+            res.push_back(it.second);
+        
+        return res;
     }
 };
