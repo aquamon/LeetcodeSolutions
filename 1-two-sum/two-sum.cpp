@@ -5,16 +5,14 @@ public:
         unordered_map<int,int>M;
         for(int i=0;i<nums.size();i++)
         {
-            M.insert({nums[i],i});
-        }
-
-        for(int i=0;i<nums.size();i++)
-        {
-            if(M.find(target-nums[i]) != M.end() and M[target-nums[i]] != i)
+            if(M.find(target-nums[i]) != M.end())
             {
                 return {i,M[target-nums[i]]};
             }
+            M.insert({nums[i],i});
         }
+
+        
         return {};
     }
 };
