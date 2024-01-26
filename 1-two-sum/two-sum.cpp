@@ -1,39 +1,18 @@
 class Solution {
 public:
-    
-    static bool cmp(pair<int,int>&P1,pair<int,int>&P2)
-    {
-        return P1.second < P2.second;
-    }
     vector<int> twoSum(vector<int>& nums, int target) {
         
-        vector<pair<int,int>>VEC;
-
-        int i=0;
-        for(int x:nums)
+        unordered_map<int,int>M;
+        for(int i=0;i<nums.size();i++)
         {
-            VEC.push_back({i++,x});
+            M.insert({nums[i],i});
         }
 
-        sort(VEC.begin(),VEC.end(),cmp);
-
-        int  j=nums.size()-1;
-        i=0;
-        while(i<j)
+        for(int i=0;i<nums.size();i++)
         {
-            int curr_sum = VEC[i].second + VEC[j].second;
-
-            if(curr_sum == target)
+            if(M.find(target-nums[i]) != M.end() and M[target-nums[i]] != i)
             {
-                return {VEC[i].first,VEC[j].first};
-            }
-            else if(curr_sum > target)
-            {
-                j--;
-            }
-            else
-            {
-                i++;
+                return {i,M[target-nums[i]]};
             }
         }
         return {};
