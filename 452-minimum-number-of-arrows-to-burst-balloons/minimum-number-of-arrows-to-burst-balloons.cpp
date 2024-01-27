@@ -2,28 +2,28 @@ class Solution {
 public:
     static bool cmp(vector<int>&a,vector<int>&b)
     {
-        return a[0] < b[0];
+        return a[1] < b[1];
     }
+    
     int findMinArrowShots(vector<vector<int>>& points) {
         
         sort(points.begin(),points.end(),cmp);
 
         vector<int>curr = points[0];
 
-        int count = 1;
-        for(int i=0;i<points.size();i++)
+        int arrows = 1;
+        int last = points[0][1];
+
+        for(int i=1;i<points.size();i++)
         {
-            if(curr[1] < points[i][0])
+            if(points[i][0] > last)
             {
-                curr = points[i];
-                count++;
+                arrows++;
+                last = points[i][1];
             }
-            
-                curr[1] = min(curr[1],points[i][1]);
-           
         }
       
-        return count;
+        return arrows;
         
     }
 };
