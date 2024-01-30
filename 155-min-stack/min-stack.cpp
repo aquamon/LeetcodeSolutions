@@ -4,8 +4,8 @@ class MinStack {
     long long curr_min;
 public:
     MinStack() {
-        while(ST.empty()==false)
-            ST.pop();
+        // while(ST.empty()==false)
+        //     ST.pop();
         curr_min = LONG_MAX;
     }
     
