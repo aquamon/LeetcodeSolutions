@@ -4,14 +4,12 @@ class MinStack {
     long long curr_min;
 public:
     MinStack() {
-        // while(ST.empty()==false)
-        //     ST.pop();
         curr_min = LONG_MAX;
     }
     
     void push(int value) {
 
-        long long val = value;
+        long long int val = value;
         if(ST.empty())
         {
             ST.push(val);
@@ -19,7 +17,7 @@ public:
         }
         else if(val < curr_min)
         {
-            ST.push((long long)(2*val) - curr_min);
+            ST.push((long long)(2*val - curr_min));
             curr_min = val;
         }
         else
@@ -38,7 +36,7 @@ public:
         }
         else
         {
-            curr_min = (long long)(2*curr_min) - ST.top();
+            curr_min = 2*curr_min - ST.top();
             ST.pop();
         }
     }
