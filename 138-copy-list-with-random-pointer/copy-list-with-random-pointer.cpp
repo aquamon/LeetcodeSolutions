@@ -17,48 +17,55 @@ public:
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
-    if(!head)
-        return NULL;
-     Node*tmp = head;
-
-     while(tmp)
-     {
-         Node* dup = new Node(tmp->val);
-         Node* tmp2 = tmp;
-         tmp = tmp->next;
-         tmp2->next = dup;
-         dup->next = tmp;   
-         
-     }
-
-     tmp = head;
-
-     while(tmp)
-     {
-         if(tmp->random == NULL)
-            tmp->next->random = NULL;
-        else
-            tmp->next->random = tmp->random->next;
         
-        tmp = tmp->next->next;
-     }
+        if(!head)
+            return head;
+        
 
-     Node* newhead = head->next;
+        Node *temp = head;
 
-     tmp = head;
-     Node* tmp2 = newhead;
+        while(temp)
+        {
+            Node* newNode = new Node(temp->val);
+            Node* nxt  = temp->next;
+            temp->next = newNode;
+            newNode->next = nxt;
+            temp = nxt;
+        }
 
-     while(tmp2->next)
-     {
-        tmp->next = tmp->next->next;
-        tmp2->next = tmp2->next->next;
-        tmp2 = tmp2->next;
-        tmp = tmp->next;
-     }
-     tmp->next = tmp->next->next;
+        
+        Node* curr = head;
 
-    return newhead;
+        while(curr)
+        {
+            if(curr->random == NULL)
+            {
+                curr->next->random = NULL;
+            }
+            else
+            {
+                curr->next->random = curr->random->next;
+            }
+            curr = curr->next->next;
+        }
 
+        curr = head;
 
+        Node* curr2 = curr->next;
+
+        Node *new_head = curr2;
+
+        while(curr2->next != NULL)
+        {
+            curr->next = curr->next->next;
+            curr2->next = curr2->next->next;
+            curr2 = curr2->next;
+            curr = curr->next;
+        }
+
+        curr->next = curr->next->next;
+        return new_head;
+
+       
     }
 };
