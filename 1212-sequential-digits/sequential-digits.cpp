@@ -1,29 +1,30 @@
 class Solution {
 public:
-
-    vector<int>res;
-
-    void dfs(int i,int low,int high)
-    {
-        if(i >=low and i <= high)
-            res.push_back(i);
-        
-        if(i > high or i%10 == 9)
-            return;
-        
-        dfs((i*10)+(i%10 + 1),low,high);
-    }
-
     vector<int> sequentialDigits(int low, int high) {
         
+        vector<int>answer;
 
-        for(int i=1;i<=9;i++)
+        string buffer = "123456789";
+        string start = to_string(low);
+        string finish = to_string(high);
+
+        for(int i=start.size();i<=finish.size();i++)
         {
-            dfs(i,low,high);
+            for(int j=0;j<=9-i;j++)
+            {
+                string curr = buffer.substr(j,i);
+                int num = stoi(curr);
+
+                if(num >= low and num <= high)
+                    answer.push_back(num);
+                if(num > high)
+                    break;
+                
+            }
         }
 
-        sort(res.begin(),res.end());
-        return res;
+        return answer;
+
 
     }
 };
