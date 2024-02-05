@@ -3,20 +3,28 @@ public:
     int firstUniqChar(string s) {
         
         int freq[26] = {0};
-    
-        for(char x:s)
-            freq[x-'a']++;
-        
-        int idx = 0;
-        for(char x : s)
+
+        for(int i=0;i<s.size();i++)
         {
-            if(freq[x-'a'] == 1)
-                return idx;
-            idx++;
+            if(freq[s[i] - 'a'] == 0)
+            {
+                freq[s[i]-'a'] = -(i+1);
+            }
+            else
+            {
+                freq[s[i]-'a'] = i+1;
+            }
         }
 
-        //iterated the given string twice
+        int ans = INT_MIN;
+        for(int i=0;i<26;i++)
+        {
+            if(freq[i] < 0)
+            {
+                ans = max(ans,freq[i]);
+            }
+        }
 
-        return -1;
+        return ans == INT_MIN ? -1 : -1*ans - 1;
     }
 };
