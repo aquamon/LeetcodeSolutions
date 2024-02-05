@@ -15,6 +15,8 @@ public:
             idx++;
         }
 
+        //iterated the given string twice
+
         return -1;
     }
 };
