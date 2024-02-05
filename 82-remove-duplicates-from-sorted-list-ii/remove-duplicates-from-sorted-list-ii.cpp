@@ -15,46 +15,30 @@ public:
         if(!head or !head->next)
             return head;
         
-        ListNode *prev = NULL , *curr = head , *curr2 = head->next;
+        ListNode *temp = new ListNode(0);
 
-        while(curr->next)
+        temp->next = head;
+
+        ListNode *curr = head , *prev = temp;
+
+        while(curr and curr->next)
         {
-            if(curr->val != curr2->val)
+            if(curr->next and curr->val == curr->next->val)
             {
-                prev = curr;
-                curr = curr2;
-                if(curr2)
-                    curr2 = curr2->next;
+                while(curr->next and curr->val == curr->next->val)
+                {
+                    curr = curr->next;
+                }
+                prev->next = curr->next;
             }
             else
             {
-                while(curr)
-                {
-                    curr2 = curr2->next;
-                    if(curr2 == NULL)
-                    {
-                       if(prev)
-                            prev->next = NULL;
-                        else
-                            return NULL;
-                        
-                        return head;
-
-                    }
-                    if(curr->val != curr2->val)
-                    {
-                        curr = curr2;
-                        curr2 = curr2->next;
-                        if(prev)
-                            prev->next = curr;
-                        else
-                            head = curr;
-                        break;
-                    }
-                }
+                prev = prev->next;
             }
+
+            curr = curr->next;
+
         }
-        return head;
-        
+        return temp->next;
     }
 };
