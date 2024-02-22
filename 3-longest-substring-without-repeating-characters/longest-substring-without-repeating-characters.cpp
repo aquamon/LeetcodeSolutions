@@ -4,22 +4,22 @@ public:
         
         if(s.size() < 1)
             return 0;
-        
-        int freq[256] = {0};
-
-        int i=0 , j=1, ans = 1;
-        freq[s[i]]++;
-        while(j < s.length())
+        int i=0,j=1;
+        unordered_map<char,int>M;
+        M[s[i]]++;
+        int ans = 1;
+        while(j < s.size())
         {
-            while(j < s.length() and freq[s[j]] == 0)
+            while(j < s.size() and M[s[j]] == 0)
             {
-                freq[s[j]]++;
+                M[s[j]]++;
                 j++;
             }
             ans = max(ans,j-i);
-            freq[s[i]]--;
+            M[s[i]]--;
             i++;
         }
+
         return ans;
     }
 };
