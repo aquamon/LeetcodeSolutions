@@ -1,27 +1,32 @@
 class Solution {
 public:
     string maximumOddBinaryNumber(string s) {
-        
-        vector<char>one , zero;
 
-        for(char x : s)
+        for(int i=0;i<s.size();i++)
         {
-            if(x == '1')
-                one.push_back(x);
-            else
-                zero.push_back(x);
+            if(s[i] == '1')
+            {
+                swap(s[i],s[s.size()-1]);
+                break;
+            }
+        }    
+        int i=0 , j = s.size()-2;
+
+        while(i < j)
+        {
+            while(s[i] == '1' and i < j)
+            {
+                i++;
+            }
+            while(s[j] == '0' and j > i)
+            {
+                j--;
+            }
+            if(i < s.size() and j >=0 )
+                swap(s[i],s[j]);
+
         }
 
-        string res = "1";
-
-        for(char x : zero)
-            res = x + res;
-        
-        one.pop_back();
-
-        for(char x : one)
-            res = x + res;
-
-        return res;
+        return s;
     }
 };
