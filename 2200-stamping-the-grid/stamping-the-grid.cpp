@@ -25,12 +25,12 @@ public:
 
         int ans = psum[r2][c2];
 
-        if(r1 >0 )
+        if(r1-1 >=0 )
             ans -= psum[r1-1][c2];
-        if(c1 >0)
+        if(c1-1 >= 0)
             ans -= psum[r2][c1-1];
         
-        if(r1>0 and c1 >0)
+        if(r1-1 >= 0 and c1-1 >= 0)
             ans += psum[r1-1][c1-1];
         
         return ans;
@@ -56,14 +56,17 @@ public:
                 int bottomX = i+stampHeight-1;
                 int bottomY = j+stampWidth-1;
 
-                if(bottomX >= grid.size() or bottomY >= grid[0].size()) break;
-
-               
+                if(bottomX < N and bottomY < M)
+                {
                     int sum = computePrefix(psum,i,j,bottomX,bottomY);
                     if(sum == 0)
                     {
                         B[bottomX][bottomY] = 1;
                     }
+                }
+
+
+
             }
         }
 
@@ -78,8 +81,7 @@ public:
 
                 int bottomX = min(X,N-1);
                 int bottomY = min(Y,M-1);
-
-                if( grid[i][j] == 0)
+                if(grid[i][j] == 0)
                 {
                     int sum = computePrefix(B,i,j,bottomX,bottomY);
                     if(sum == 0)
