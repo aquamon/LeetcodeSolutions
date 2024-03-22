@@ -1,19 +1,11 @@
 class Solution {
 public:
-    vector<vector<int>> compute(vector<vector<char>>&matrix,int N,int M)
+
+    void calculatePrefixSum(vector<vector<int>>&psum)
     {
-        vector<vector<int>>psum(N,vector<int>(M,0));
-        for(int i=0;i<N;i++)
-        {
-            for(int j=0;j<M;j++)
-            {
-                if(matrix[i][j] == '1')
-                {
-                    psum[i][j] = 1;
-                }
-                
-            }
-        }
+        int N = psum.size();
+        int M = psum[0].size();
+
         for(int i=0;i<N;i++)
         {
             for(int j=1;j<M;j++)
@@ -29,59 +21,71 @@ public:
                 psum[i][j] += psum[i-1][j];
             }
         }
-        return psum;
+
     }
-    int giveSum(vector<vector<int>>&matrix,int r1,int c1,int r2,int c2)
+
+    int sumRegion(vector<vector<int>>&psum,int r1,int c1, int r2, int c2)
     {
-        int ans = matrix[r2][c2];
-        
+        int ans = psum[r2][c2];
+
         if(r1 > 0)
-            ans -= matrix[r1-1][c2];
+            ans -= psum[r1-1][c2];
         if(c1 > 0)
-            ans -= matrix[r2][c1-1];
+            ans -= psum[r2][c1-1];
         if(r1 > 0 and c1 > 0)
-            ans += matrix[r1-1][c1-1];
+            ans += psum[r1-1][c1-1];
+        
+        return ans;
+    }
+    int calculate(vector<vector<int>>&psum,int i, int j)
+    {
+        int l = 1 , h = min(psum.size()-i , psum[0].size()-j);
+        int ans = 1;
+        while(l <= h)
+        {
+            int mid = l + (h-l)/2;
+
+            int botX = i+mid-1;
+            int botY = j+mid-1;
+
+            int sum = sumRegion(psum,i,j,botX,botY);
+
+            if(sum == mid*mid)
+            {
+                ans = mid*mid;
+                l = mid+1;
+            }
+            else
+            {
+                h = mid-1;
+            }
+        }
         return ans;
     }
     int maximalSquare(vector<vector<char>>& matrix) {
-        
-        int N = matrix.size();
-        int M = matrix[0].size();
 
-        vector<vector<int>>psum(N,vector<int>(M,0));
-        psum = compute(matrix,N,M);
+        vector<vector<int>>psum(matrix.size(),vector<int>(matrix[0].size(),0));
 
-        
-
-        int ans = 0;
-        for(int i=0;i<N;i++)
+        for(int i=0;i<matrix.size();i++)
         {
-            for(int j=0;j<M;j++)
+            for(int j=0;j<matrix[0].size();j++)
             {
-                if(matrix[i][j] == '1')
-                {
-                    ans = max(ans,1);
-
-                    int botX = max(i,N-1);
-                    int botY = max(j,M-1);
-
-                    int curr_row = i+1 , curr_col = j+1;
-                    
-                    while(curr_row <= botX and curr_col <= botY)
-                    {
-                        int sum = giveSum(psum,i,j,curr_row,curr_col);
-
-                        int dist = curr_row-i+1;
-                        if(dist*dist == sum)
-                            ans = max(ans,sum);
-
-                        curr_row++;
-                        curr_col++;    
-                    }
-                }
+                psum[i][j] = matrix[i][j] - '0';
             }
         }
+        calculatePrefixSum(psum);
 
+        int ans = 0;
+
+        for(int i=0;i<matrix.size();i++)
+        {
+            for(int j=0;j<matrix[0].size();j++)
+            {
+                if(matrix[i][j] == '1')
+                    ans = max(ans,calculate(psum,i,j));
+            }
+        }
         return ans;
+
     }
 };
