@@ -16,15 +16,8 @@ public:
             }
             else
             {
-                // if(nums[i] != nums[j])
-                // {
-                    M[nums[i]]--;
-                    i++;
-            //     }
-            //    else
-            //    {
-
-            //    }
+               M[nums[i]]--;
+               i++;
             }
             
         }
