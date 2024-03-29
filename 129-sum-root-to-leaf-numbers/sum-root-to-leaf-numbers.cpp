@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    void rootToLeaf(TreeNode *root,int curr, vector<int>&nums)
+    void rootToLeaf(TreeNode *root,int curr, int &ans)
     {
         if(!root)
             return;
@@ -20,11 +20,11 @@ public:
 
         if(!root->left and !root->right)
         {
-            nums.push_back(curr);
+            ans += curr;
             return;
         }
-        rootToLeaf(root->left,curr,nums);
-        rootToLeaf(root->right,curr,nums);
+        rootToLeaf(root->left,curr,ans);
+        rootToLeaf(root->right,curr,ans);
     }
     int sumNumbers(TreeNode* root) {
         
@@ -32,14 +32,14 @@ public:
             return 0;
         
         int curr = 0 ;
-        vector<int>nums;
-
-        rootToLeaf(root,0,nums);
+        // vector<int>nums;
         int ans = 0;
-        for(int x : nums)
-        {
-            ans += x;
-        }
+        rootToLeaf(root,0,ans);
+        
+        // for(int x : nums)
+        // {
+        //     ans += x;
+        // }
         return ans;
 
     }
