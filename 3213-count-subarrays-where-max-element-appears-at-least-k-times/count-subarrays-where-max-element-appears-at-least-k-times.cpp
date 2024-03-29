@@ -4,23 +4,23 @@ public:
         
         int MAX = *max_element(nums.begin(),nums.end());
 
-        long long ans = 0 , start = 0;
+        long long ans = 0;
 
-        for(int end = 0; end < nums.size();end++)
+        int i=0 , j = 0;
+
+        unordered_map<int,int>M;
+
+        while(j < nums.size())
         {
-            if(nums[end] == MAX)
+            M[nums[j]]++;
+
+            while(M[MAX] >= k)
             {
-                k--;
+                ans = ans + nums.size()-j;
+                M[nums[i]]--;
+                i++;
             }
-            while(!k)
-            {
-                if(nums[start] == MAX)
-                {
-                    k++;
-                }
-                start++;
-            }
-            ans += start;
+            j++;
         }
         return ans;
 
