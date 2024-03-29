@@ -2,27 +2,28 @@ class Solution {
 public:
     long long countSubarrays(vector<int>& nums, int k) {
         
-        int MAX = *max_element(nums.begin(),nums.end());
-
         long long ans = 0;
 
-        int i=0 , j = 0;
-
-        unordered_map<int,int>M;
-
-        while(j < nums.size())
+        int MAX = *max_element(nums.begin(),nums.end());
+        int count = 0;
+        for(int i=0,j=0;j<nums.size();j++)
         {
-            M[nums[j]]++;
-
-            while(M[MAX] >= k)
+            if(nums[j] == MAX)
             {
-                ans = ans + nums.size()-j;
-                M[nums[i]]--;
+                count++;
+            }
+
+            while(count == k)
+            {
+                if(nums[i] == MAX)
+                    count--;
                 i++;
             }
-            j++;
-        }
-        return ans;
 
+            ans += i;
+
+        }
+
+        return ans;
     }
 };
