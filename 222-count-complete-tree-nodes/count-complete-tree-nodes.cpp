@@ -16,9 +16,26 @@ public:
         if(!root)
             return 0;
         
-        if(!root->left and !root->right)
-            return 1;
-        
+        int height_left = 0 , height_right = 0;
+
+        TreeNode *L = root , *R = root;
+
+        while(L)
+        {
+            height_left++;
+            L = L->left;
+        }
+        while(R)
+        {
+            height_right++;
+            R = R->right;
+        }
+
+        if(height_left == height_right)
+        {
+            return pow(2,height_left) - 1;
+        }
+
         return 1 + countNodes(root->left) + countNodes(root->right);
     }
 };
