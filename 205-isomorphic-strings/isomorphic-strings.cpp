@@ -2,35 +2,31 @@ class Solution {
 public:
     bool isIsomorphic(string s, string t) {
         
-        unordered_map<char,int>M1;
-        unordered_map<char,int>M2;
-        unordered_map<char,char>REP;
-        for(char x : s)
-        {
-            M1[x]++;
-        }
-        for(char x : t)
-        {
-            M2[x]++;
-        }
-
-        if(M1.size() != M2.size())
-        {
+        if(s.size() != t.size())
             return false;
-        }
+        unordered_map<char , char > S_map_to_T , T_map_to_S;
 
         for(int i=0;i<s.size();i++)
         {
-            if(M1[s[i]] != M2[t[i]])
-                return false;
-            if(REP.find(s[i]) == REP.end())
-                REP[s[i]] = t[i];
+            if(S_map_to_T.find(s[i]) != S_map_to_T.end())
+            {
+                if(S_map_to_T[s[i]] != t[i])
+                    return false;
+            }
+            else
+            {
+                if(T_map_to_S.find(t[i])!= T_map_to_S.end())
+                {
+                    return false;
+                }
+                else
+                {
+                    S_map_to_T[s[i]] = t[i];
+                    T_map_to_S[t[i]] = s[i];
+                }
+            }
         }
-
-        for(int i=0;i<s.size();i++)
-        {
-            s[i] = REP[s[i]];
-        }
-        return s==t;
+        return true;
+        
     }
 };
