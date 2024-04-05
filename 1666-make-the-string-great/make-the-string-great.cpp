@@ -4,30 +4,40 @@ public:
         
         stack<char>ST;
 
+        char prev = '0';
+        string res = "";
         for(char x : s)
         {
-            if(ST.empty())
-                ST.push(x);
+            if(prev == '0')
+            {
+                prev = x;
+                res.push_back(x);
+            }
             else
             {
-                char prev = ST.top();
-                if(abs(x-prev) == 32)
+                if(abs(x-prev) == abs('A'-'a'))
                 {
-                    ST.pop();
+                    res.pop_back();
+                    if(res.size() > 0)
+                        prev = res.back();
+                    else
+                        prev = '0';
                 }
                 else
                 {
-                    ST.push(x);
+                    res.push_back(x);
+                    prev = x;
                 }
             }
         }
-
-        string res = "";
-        while(!ST.empty())
-        {
-            res = ST.top() + res;
-            ST.pop();
-        }
         return res;
+
+        // string res = "";
+        // while(!ST.empty())
+        // {
+        //     res = ST.top() + res;
+        //     ST.pop();
+        // }
+        // return res;
     }
 };
