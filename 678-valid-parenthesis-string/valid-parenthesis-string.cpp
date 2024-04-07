@@ -2,39 +2,35 @@ class Solution {
 public:
     bool checkValidString(string s) {
         
-        int count = 0;
+        int Open_count = 0;
+        int Close_count = 0;
 
         for(int i=0;i<s.size();i++)
         {
             if(s[i] == '(' or s[i] == '*')
             {
-                count++;
+                Open_count++;
             }
             else
             {
-                count--;
-                if(count < 0)
-                    return false;
+                Open_count--;
             }
-
-        }
-
-        count = 0;
-
-        for(int i=s.size()-1;i>=0;i--)
-        {
-            if(s[i] == ')' or s[i] == '*')
+            if(s[s.size()-1-i] == ')' or s[s.size()-1-i] == '*')
             {
-                count++;
+                Close_count++;
             }
             else
             {
-                count--;
-                if(count < 0)
-                    return false;
+                Close_count--;
             }
+
+            if(Open_count < 0 || Close_count < 0)
+                return false;
+
+
         }
 
+       
         return true;
     }
 };
