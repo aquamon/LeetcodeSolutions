@@ -2,33 +2,44 @@ class Solution {
 public:
     int countStudents(vector<int>& students, vector<int>& sandwiches) {
         
-        queue<int> student;
-        stack<int> sandwich;
+        int student_count = students.size();
+        int circle = 0 , square = 0;
 
-        for(int i=0;i<students.size();i++)
+        for(int x:students)
         {
-            student.push(students[i]);
-            sandwich.push(sandwiches[sandwiches.size()-1-i]);
+            if(x == 0)
+                circle++;
+            else
+                square++;
         }
 
-        int last_served = 0;
-
-        while(last_served < student.size() and !student.empty())
+        for(int x:sandwiches)
         {
-            if(sandwich.top() == student.front())
+            if(x == 0 )
             {
-                last_served = 0;
-                sandwich.pop();
-                student.pop();
-
+               if(circle > 0)
+               {
+                circle--;
+                student_count--;
+               }
+               else
+               {
+                return student_count;
+               }
             }
             else
             {
-                last_served++;
-                student.push(student.front());
-                student.pop();
+                if(square > 0)
+                {
+                    square--;
+                    student_count--;
+                }
+                else
+                {
+                    return student_count;
+                }
             }
         }
-        return student.size();
+        return student_count;
     }
 };
