@@ -11,36 +11,32 @@
  */
 class Solution {
 public:
-    void rootToLeaf(TreeNode *root,int curr, int &ans)
+    
+    int solve(TreeNode* root,int curr_num)
     {
-        if(!root)
-            return;
-        curr *= 10;
-        curr += root->val;
-
-        if(!root->left and !root->right)
-        {
-            ans += curr;
-            return;
-        }
-        rootToLeaf(root->left,curr,ans);
-        rootToLeaf(root->right,curr,ans);
-    }
-    int sumNumbers(TreeNode* root) {
-        
         if(!root)
             return 0;
         
-        int curr = 0 ;
-        // vector<int>nums;
-        int ans = 0;
-        rootToLeaf(root,0,ans);
-        
-        // for(int x : nums)
-        // {
-        //     ans += x;
-        // }
-        return ans;
+        if(!root->left  and !root->right)
+        {
+            curr_num *= 10;
+            curr_num += root->val;
+            return curr_num;
+        }
 
+        curr_num *=10;
+        curr_num += root->val;
+
+        int left = solve(root->left,curr_num);
+        int right = solve(root->right,curr_num);
+        return left + right;
+    }
+    int sumNumbers(TreeNode* root) {
+        
+        
+        int curr_num = 0;
+
+        return solve(root,curr_num);
+        
     }
 };
