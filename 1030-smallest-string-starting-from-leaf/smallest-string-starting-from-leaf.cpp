@@ -37,32 +37,15 @@ public:
 
        return {L,R}; 
        
-
-        // if(Left < Right)
-        // {
-        //     // char x = root->val + 'a';
-        //     // Left += x;
-        //     return Left;
-        // }
-        // else
-        // {
-        //     // char x = root->val + 'a';
-        //     // Right += x;
-        //     return Right;
-        // }
-
-        // return {Left,Right};
     }
     string smallestFromLeaf(TreeNode* root) {
         
-        // string res = "";
-
+       
         pair<string,string> res =  solve(root);
 
         if(res.first < res.second)
             return res.first;
         return res.second;
 
-        // return res;
     }
 };
