@@ -1,47 +1,48 @@
 class MinStack {
-
-    stack<long long int>ST;
-    long long curr_min;
+    stack<long long int> ST;
+    long long int curr_min ;
 public:
     MinStack() {
-        curr_min = LONG_MAX;
+        curr_min = INT_MAX;
     }
     
-    void push(int value) {
-
-        long long int val = value;
+    void push(int val) {
+        long long int value = val;
         if(ST.empty())
         {
-            ST.push(val);
-            curr_min = val;
+            curr_min = value;
+            ST.push(value);
         }
-        else if(val < curr_min)
+        else if(value < curr_min)
         {
-            ST.push((long long)(2*val - curr_min));
-            curr_min = val;
+            ST.push(2*value - curr_min);
+            curr_min = value;
         }
         else
         {
-            ST.push(val);
+            ST.push(value);
         }
-        
     }
     
     void pop() {
         if(ST.empty())
             return;
+        
         if(ST.top() > curr_min)
         {
             ST.pop();
         }
         else
         {
-            curr_min = 2*curr_min - ST.top();
+            
+            curr_min = (2*curr_min - ST.top());
             ST.pop();
         }
     }
     
     int top() {
+        if(ST.empty())
+            return -1;
         if(ST.top() > curr_min)
             return ST.top();
         return curr_min;
