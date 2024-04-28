@@ -39,14 +39,14 @@ public:
 
         int i = window.first , j = window.second;
 
-        for(;i<=j;i++)
-            grumpy[i] = 0;
+        // for(;i<=j;i++)
+        //     grumpy[i] = 0;
         
         int answer = 0;
 
         for(int i=0;i<customers.size();i++)
         {
-            if(grumpy[i] == 0)
+            if(grumpy[i] == 0 or (i <= window.second and i >= window.first))
                 answer += customers[i];
         }
 
