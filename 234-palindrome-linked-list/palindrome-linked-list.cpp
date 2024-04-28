@@ -27,16 +27,28 @@ public:
     {
         if(!head or !head->next) return head;
 
-        ListNode* tmp = head , *prev = NULL;//->next;
+        // ListNode* tmp = head , *prev = NULL;//->next;
 
-        while(tmp)
-        {
-            ListNode *nxt = tmp->next;
-            tmp->next = prev;
-            prev = tmp;
-            tmp = nxt;
-        }
-        return prev;
+        // while(tmp)
+        // {
+        //     ListNode *nxt = tmp->next;
+        //     tmp->next = prev;
+        //     prev = tmp;
+        //     tmp = nxt;
+        // }
+        // return prev;
+
+        ListNode *nxt = head->next;
+        
+        head->next = NULL;
+
+        ListNode *new_head = reverse(nxt);
+
+        nxt->next = head;
+
+        return new_head;
+
+
         
     }
     bool isPalindrome(ListNode* head) {
