@@ -14,7 +14,7 @@ public:
         int max_sum = sum;
         for(int i=0 , j=K;i<customers.size()-K+1 and j < customers.size();i++,j++)
         {
-            int prev_sum = sum;
+           
             if(grumpy[j] == 1)
             {
                 sum += customers[j];
@@ -31,21 +31,17 @@ public:
             }
             
         }
-        // if(K == 1)
-        //     x = y;
-
+        
         return {x,y};
     }
     int maxSatisfied(vector<int>& customers, vector<int>& grumpy, int minutes) {
         
-        // if(minutes == 0)
-        //     return solve(customers,grumpy);
-        
+              
         pair<int,int> window = getWindow(customers,grumpy,minutes);
 
         int i = window.first , j = window.second;
 
-        cout<<i<<" "<<j<<endl;
+        
 
         for(;i<=j;i++)
         {
