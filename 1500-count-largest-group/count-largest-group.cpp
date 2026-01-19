@@ -24,8 +24,8 @@ public:
             maxValue = max(maxValue,it.second);
         }
         int count = 0;
-        for (auto& [_, value] : hashMap) {
-            if (value == maxValue) {
+        for (auto it :  hashMap) {
+            if (it.second == maxValue) {
                 ++count;
             }
         }
