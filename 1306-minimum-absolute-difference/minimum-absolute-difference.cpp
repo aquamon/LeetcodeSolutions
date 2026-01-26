@@ -1,14 +1,6 @@
 class Solution {
 public:
-     bool static cmp(pair<int,int>&a, pair<int,int>&b)
-    {
-        return a.first < a.second and b.first < b.second;
-    }
-
-    bool static cmp2(vector<vector<int>>&a , vector<vector<int>>&b)
-    {
-        return a[0][0]<a[0][1] and b[0][0] < b[0][1];
-    }
+    
     vector<vector<int>> minimumAbsDifference(vector<int>& arr) {
         
         sort(arr.begin(),arr.end());
