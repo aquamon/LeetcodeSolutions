@@ -10,34 +10,16 @@ public:
         {
             min_abs_diff = min(min_abs_diff,arr[i]-arr[i-1]);
         }
-        unordered_map<int,int>HM;
-        for(int i=0;i<arr.size();i++)
+        
+        vector<vector<int>>answer;
+        for(int i=1;i<arr.size();i++)
         {
-            HM[arr[i]]++;
+            int curr_diff = arr[i]-arr[i-1];
+            if(curr_diff == min_abs_diff)
+                answer.push_back({arr[i-1],arr[i]});
+
         }
 
-        vector<vector<int>> result;
-
-        for(int i=0;i<arr.size();i++)
-        {
-            int curr = arr[i];
-
-            if(HM.find(curr-min_abs_diff) != HM.end())
-            {
-                result.push_back({curr,curr-min_abs_diff});
-                HM.erase(curr-min_abs_diff);
-            }
-        }
-
-        
-        sort(result.begin(),result.end());
-        
-        
-       
-        for(int i=0;i<result.size();i++)
-        {
-            sort(result[i].begin(),result[i].end());
-        }
-        return result;
+        return answer;
     }
 };
